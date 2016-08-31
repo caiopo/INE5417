@@ -16,4 +16,9 @@ public class Evento {
 		cursos.add(c);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("%s(nome=%s)", getClass().getName(), nome);
+	}
+
 }

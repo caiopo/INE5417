@@ -33,6 +33,56 @@ public abstract class Curso {
 
 	@Override
 	public String toString() {
-		return String.format("Curso(nome=%s, duracao=%d)", nome, duracao);
+		return String.format("%s(nome=%s, duracao=%d)", getClass().getName(),
+				nome, duracao);
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public LocalDateTime getHorario() {
+		return horario;
+	}
+
+	public Local getLocal() {
+		return local;
+	}
+
+	public int getDuracao() {
+		return duracao;
+	}
+
+	public Palestrante getPalestrante() {
+		return palestrante;
+	}
+
+	public List<Participante> getParticipantes() {
+		return participantes;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setHorario(LocalDateTime horario) {
+		this.horario = horario;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
+	public void setDuracao(int duracao) {
+		this.duracao = duracao;
+	}
+
+	public void setPalestrante(Palestrante palestrante) {
+		this.palestrante = palestrante;
+	}
+
+	public void setParticipantes(List<Participante> participantes) {
+		this.participantes = participantes;
+	}
+
 }

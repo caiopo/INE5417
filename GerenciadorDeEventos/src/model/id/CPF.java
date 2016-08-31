@@ -2,6 +2,7 @@ package model.id;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import exceptions.BadCPFException;
 
@@ -23,12 +24,8 @@ public class CPF extends Identificador {
 	}
 
 	public static boolean isValid(String cpf) {
-		// xxx.xxx.xxx-xx
-		// xxxxxxxxxxx
 
-		if (cpf.length() == 14 && cpf.charAt(3) == '.' && cpf.charAt(7) == '.'
-				&& cpf.charAt(11) == '-') {
-
+		if (Pattern.matches("\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}", cpf)) {
 			cpf = cpf.replace(".", "").replace("-", "");
 		}
 
