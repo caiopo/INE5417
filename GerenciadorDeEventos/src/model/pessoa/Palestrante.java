@@ -1,6 +1,6 @@
 package model.pessoa;
 
-import others.Identificador;
+import model.id.Identificador;
 
 public class Palestrante extends Participante {
 
