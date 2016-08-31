@@ -2,9 +2,9 @@ package model.id;
 
 public abstract class Identificador {
 
-	public abstract String getID();
+	public abstract String get();
 
 	public boolean equals(Identificador outro) {
-		return getID().equals(outro.getID());
+		return get().equals(outro.get());
 	}
 }

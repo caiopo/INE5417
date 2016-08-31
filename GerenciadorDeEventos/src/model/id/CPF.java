@@ -10,6 +10,19 @@ public class CPF extends Identificador {
 	private String cpf;
 
 	public CPF(String cpf) {
+		if (!isValid(cpf)) {
+			throw new BadCPFException();
+		}
+
+		this.cpf = cpf;
+	}
+
+	@Override
+	public String get() {
+		return cpf;
+	}
+
+	public static boolean isValid(String cpf) {
 		// xxx.xxx.xxx-xx
 		// xxxxxxxxxxx
 
@@ -20,7 +33,7 @@ public class CPF extends Identificador {
 		}
 
 		if (cpf.length() != 11) {
-			throw new BadCPFException();
+			return false;
 		}
 
 		List<Integer> nums = new ArrayList<>();
@@ -30,7 +43,7 @@ public class CPF extends Identificador {
 		for (int i = 0; i < 9; i++) {
 			final int j = i;
 			if (nums.stream().allMatch(n -> n == j)) {
-				throw new BadCPFException();
+				return false;
 			}
 		}
 
@@ -59,15 +72,10 @@ public class CPF extends Identificador {
 		}
 
 		if (!(dig1 == nums.get(9) && dig2 == nums.get(10))) {
-			throw new BadCPFException();
+			return false;
 		}
-		
-		this.cpf = cpf;
-	}
 
-	@Override
-	public String getID() {
-		return cpf;
+		return true;
 	}
 
 }
