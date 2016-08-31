@@ -12,4 +12,8 @@ public class Palestra extends Curso {
 		super(nome, horario, local, palestrante, duracao);
 	}
 
+	@Override
+	public String toString() {
+		return super.toString().replace("Curso", "Palestra");
+	}
 }

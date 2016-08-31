@@ -31,4 +31,8 @@ public abstract class Curso {
 		participantes.add(p);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Curso(nome=%s, duracao=%d)", nome, duracao);
+	}
 }
