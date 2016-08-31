@@ -9,7 +9,7 @@ public class Matricula extends Identificador {
 	}
 
 	@Override
-	public String get() {
+	public String getID() {
 		return matricula;
 	}
 
