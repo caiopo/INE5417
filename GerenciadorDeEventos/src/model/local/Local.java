@@ -9,4 +9,8 @@ public abstract class Local {
 		this.nome = nome;
 		this.capacidade = capacidade;
 	}
+
+	public boolean equals(Local outro) {
+		return nome.equals(outro.nome) && capacidade == outro.capacidade;
+	}
 }
