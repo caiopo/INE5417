@@ -4,7 +4,6 @@ import java.awt.LayoutManager;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,16 +16,12 @@ import model.id.Matricula;
 import model.pessoa.Palestrante;
 import model.pessoa.Participante;
 
-public class CadastroUsuario extends JFrame {
+public class CadastroPessoa {
 
-	public CadastroUsuario() {
-		
-	}
-	
-	public Palestrante cadastroPalestrante() {
+	public static Palestrante cadastroPalestrante() {
 		JTextField nome = new JTextField(15);
 		JTextField id = new JTextField(15);
-		
+
 		JRadioButton btnCpf = new JRadioButton("CPF:", false);
 		JRadioButton btnMatricula = new JRadioButton("Matricula UFSC:", false);
 		ButtonGroup grupoId = new ButtonGroup();
@@ -34,13 +29,13 @@ public class CadastroUsuario extends JFrame {
 		grupoId.add(btnMatricula);
 
 		JPanel janela = new JPanel();
-		janela.setLayout((LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
+		janela.setLayout(
+				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
 		janela.add(new JLabel("Nome:"));
 		janela.add(nome);
 		janela.add(btnCpf);
 		janela.add(btnMatricula);
 		janela.add(id);
-
 
 		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
 				"Palestrante, favor insira seus dados.",
@@ -51,25 +46,25 @@ public class CadastroUsuario extends JFrame {
 		_id = id.getText();
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
-			if(btnCpf.isSelected()) {
-				CPF _cpf = null;
+			if (btnCpf.isSelected()) {
 				try {
-					_cpf = new CPF(_id);
+					return new Palestrante(_nome, new CPF(_id));
 				} catch (BadCPFException e) {
-					JOptionPane.showMessageDialog(null, "CPF Inválido");				}
-				return new Palestrante(_nome, _cpf); 
+					JOptionPane.showMessageDialog(null, "CPF Inválido");
+				}
+				return null;
 			} else {
 				return new Palestrante(_nome, new Matricula(_id));
 			}
-		} else {
-			return null;
 		}
+
+		return null;
 	}
-	
-	public Participante cadastroParticipante() {
+
+	public static Participante cadastroParticipante() {
 		JTextField nome = new JTextField(15);
 		JTextField id = new JTextField(15);
-		
+
 		JRadioButton btnCpf = new JRadioButton("CPF:", false);
 		JRadioButton btnMatricula = new JRadioButton("Matricula UFSC:", false);
 		ButtonGroup grupoId = new ButtonGroup();
@@ -77,13 +72,13 @@ public class CadastroUsuario extends JFrame {
 		grupoId.add(btnMatricula);
 
 		JPanel janela = new JPanel();
-		janela.setLayout((LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
+		janela.setLayout(
+				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
 		janela.add(new JLabel("Nome:"));
 		janela.add(nome);
 		janela.add(btnCpf);
 		janela.add(btnMatricula);
 		janela.add(id);
-
 
 		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
 				"Participante, favor insira seus dados.",
@@ -94,19 +89,19 @@ public class CadastroUsuario extends JFrame {
 		_id = id.getText();
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
-			if(btnCpf.isSelected()) {
-				CPF _cpf = null;
+			if (btnCpf.isSelected()) {
 				try {
-					_cpf = new CPF(_id);
+					return new Participante(_nome, new CPF(_id));
 				} catch (BadCPFException e) {
 					JOptionPane.showMessageDialog(null, "CPF Inválido");
 				}
-				return new Participante(_nome, _cpf);
+				return null;
+
 			} else {
 				return new Participante(_nome, new Matricula(_id));
 			}
-		} else {
-			return null;
 		}
+
+		return null;
 	}
 }
