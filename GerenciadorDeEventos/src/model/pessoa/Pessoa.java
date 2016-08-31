@@ -15,4 +15,9 @@ public abstract class Pessoa {
 	public boolean equals(Pessoa outra) {
 		return nome.equals(outra.nome) && id.get().equals(outra.id.get());
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("Pessoa(nome=%s, ID=%s)", nome, id);
+	}
 }

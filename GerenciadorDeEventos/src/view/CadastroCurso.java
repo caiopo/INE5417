@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.LayoutManager;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -10,53 +12,105 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import model.curso.Curso;
+import exceptions.BadCPFException;
 import model.curso.Minicurso;
 import model.curso.Palestra;
+import model.id.CPF;
+import model.id.Matricula;
+import model.local.Laboratorio;
+import model.local.Local;
+import model.pessoa.Palestrante;
+import model.pessoa.Participante;
 
 public class CadastroCurso {
-
-	public static Curso cadastroCurso() {
-		JTextField fieldNome = new JTextField(15);
-		JTextField fieldDuracao = new JTextField(15);
-		JTextField fieldPalestrante = new JTextField(15);
-
-		JRadioButton btnMinicurso = new JRadioButton("Minicurso", false);
-		JRadioButton btnPalestra = new JRadioButton("Palestra", false);
-		ButtonGroup tipoGrupo = new ButtonGroup();
-		tipoGrupo.add(btnMinicurso);
-		tipoGrupo.add(btnPalestra);
+	
+	public CadastroCurso(){
+		
+	}
+	
+	public Minicurso cadastroMinicurso() {
+		JTextField nome = new JTextField(15);
+		JTextField horario = new JTextField(15);
+		JTextField local = new JTextField(15);
+		JTextField duracao = new JTextField(15);
+		JTextField palestrante = new JTextField(15);
+		
 
 		JPanel janela = new JPanel();
-		janela.setLayout(
-				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
-
-		janela.add(new JLabel("Nome do Curso:"));
-		janela.add(fieldNome);
+		janela.setLayout((LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
+		janela.add(new JLabel("Nome:"));
+		janela.add(nome);
+		janela.add(new JLabel("Horario (AAAA-MM-DD HH:MM):"));
+		janela.add(horario);
+		janela.add(new JLabel("Local:"));
+		janela.add(local);
 		janela.add(new JLabel("Duração (em minutos):"));
-		janela.add(fieldDuracao);
-		janela.add(new JLabel("Matricula/CPF do Palestrante:"));
-		janela.add(fieldPalestrante);
-
-		janela.add(new JLabel("Tipo:"));
-		janela.add(btnMinicurso);
-		janela.add(btnPalestra);
-
+		janela.add(duracao);
+		janela.add(new JLabel("Palestrante"));
+		janela.add(palestrante);
 		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
-				"Cadastro de Curso", JOptionPane.OK_CANCEL_OPTION,
-				JOptionPane.PLAIN_MESSAGE);
+				"Inisira as informações do minicurso.",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+		String _nome, _horario, _local, _palestrante;
+		int _duracao;
+		_nome = nome.getText();
+		_palestrante = palestrante.getText();
+		
+		_horario = horario.getText();
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime _dateTime = LocalDateTime.parse(_horario, formatador);
+		
+		_local = local.getText();
+		_duracao = Integer.parseInt(duracao.getText());
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
-			if (btnMinicurso.isSelected()) {
-				return new Minicurso(fieldNome.getText(), null, null, null,
-						Integer.parseInt(fieldDuracao.getText()));
-			} else if (btnPalestra.isSelected()) {
-				return new Palestra(fieldNome.getText(), null, null, null,
-						Integer.parseInt(fieldDuracao.getText()));
-
-			}
+			return new Minicurso(_nome, _dateTime, new Laboratorio(_local, 50, 50), new Palestrante(_palestrante, null), _duracao);
+		} else {
+			return null;
 		}
+	}
+	
+	public Palestra cadastroPalestra() {
+		JTextField nome = new JTextField(15);
+		JTextField horario = new JTextField(15);
+		JTextField local = new JTextField(15);
+		JTextField duracao = new JTextField(15);
+		JTextField palestrante = new JTextField(15);
+		
+		JPanel janela = new JPanel();
+		janela.setLayout((LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
+		janela.add(new JLabel("Nome:"));
+		janela.add(nome);
+		janela.add(new JLabel("Horario (AAAA-MM-DD HH:MM):"));
+		janela.add(horario);
+		janela.add(new JLabel("Local:"));
+		janela.add(local);
+		janela.add(new JLabel("Duração:"));
+		janela.add(duracao);
+		janela.add(new JLabel("Palestrante"));
+		janela.add(palestrante);
+		
+		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
+				"Inisira as informações da palestra.",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-		return null;
+		String _nome, _horario, _local, _palestrante;
+		int _duracao;
+		_nome = nome.getText();
+		_palestrante = palestrante.getText();
+		
+		_horario = horario.getText();
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime _dateTime = LocalDateTime.parse(_horario, formatador);
+		
+		_local = local.getText();
+		_duracao = Integer.parseInt(duracao.getText());
+
+		if (botaoOk == JOptionPane.OK_OPTION) {
+			return new Palestra(_nome, _dateTime, new Laboratorio(_local, 50, 50), new Palestrante(_palestrante, null), _duracao);
+		} else {
+			return null;
+		}
 	}
 }

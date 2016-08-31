@@ -8,4 +8,8 @@ public class Palestrante extends Participante {
 		super(nome, id);
 	}
 
+	@Override
+	public String toString() {
+		return super.toString().replace("Participante", "Palestrante");
+	}
 }
