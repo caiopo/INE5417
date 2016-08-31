@@ -1,6 +1,8 @@
 package others;
 
-public class CPF {
+import exceptions.BadCPFException;
+
+public class CPF implements Identificador {
 
 	private String cpf;
 
@@ -23,5 +25,10 @@ public class CPF {
 		}
 
 		this.cpf = cpf;
+	}
+
+	@Override
+	public String getID() {
+		return cpf;
 	}
 }

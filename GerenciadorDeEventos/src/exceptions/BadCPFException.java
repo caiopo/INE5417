@@ -1,4 +1,4 @@
-package others;
+package exceptions;
 
 public class BadCPFException extends RuntimeException {
 
