@@ -2,8 +2,11 @@ package model.local;
 
 public class Laboratorio extends Local {
 
-	public Laboratorio(String nome, int capacidade) {
+	private final int numeroDeComputadores;
+
+	public Laboratorio(String nome, int capacidade, int numeroDeComputadores) {
 		super(nome, capacidade);
+		this.numeroDeComputadores = numeroDeComputadores;
 	}
 
 }
