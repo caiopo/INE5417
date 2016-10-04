@@ -11,6 +11,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import exceptions.BadCPFException;
+import model.curso.Evento;
 import model.id.CPF;
 import model.id.Matricula;
 import model.pessoa.Palestrante;
@@ -20,6 +21,10 @@ import model.pessoa.Pessoa;
 public class CadastroPessoa {
 	
 	public static Pessoa selecionar() {
+		if(!Evento.getInstance().possuiCurso()) {
+			JOptionPane.showMessageDialog(null, "Não existem cursos nesse evento");
+			return null;
+		}
 		JRadioButton btnParticipante = new JRadioButton("Participante", true);
 		JRadioButton btnPalestrante = new JRadioButton("Palestrante", false);
 		ButtonGroup grupoId = new ButtonGroup();

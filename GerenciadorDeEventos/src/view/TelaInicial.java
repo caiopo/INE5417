@@ -1,14 +1,11 @@
 package view;
 
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import model.curso.Curso;
+import model.curso.Evento;
 
 public class TelaInicial extends JFrame {
 	public static int sizex = 300;
@@ -22,6 +19,7 @@ public class TelaInicial extends JFrame {
 		add(btnAcompanharInscricao);
 		btnAcompanharInscricao.setBounds((sizex - sizeInscricaoX) / 2, sizey - 60, sizeInscricaoX, sizeInscricaoY);
 		btnAcompanharInscricao.addActionListener((e) -> {
+			VerificaInscricao.pegaIdentificador();
 			
 		});
 
@@ -29,7 +27,8 @@ public class TelaInicial extends JFrame {
 		add(btnCadastroCurso);
 		btnCadastroCurso.setBounds((sizex - sizeInscricaoX) / 2, sizey - 140, sizeInscricaoX, sizeInscricaoY);
 		btnCadastroCurso.addActionListener((e) -> {
-			CadastroCurso.selecionar();
+			Curso c = CadastroCurso.selecionar();
+			Evento.getInstance().adicionar(c);
 		});
 		
 		JButton btnEditaCurso = new JButton("Edição de Curso");
@@ -58,7 +57,8 @@ public class TelaInicial extends JFrame {
 		JButton btnEdicaoLocal = new JButton("Editar Local");
 		add(btnEdicaoLocal);
 		btnEdicaoLocal.setBounds((sizex - sizeInscricaoX) / 2, sizey - 260, sizeInscricaoX, sizeInscricaoY);
-
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 		setTitle("Gerenciador de Eventos");
 		setSize(sizex, sizey);
