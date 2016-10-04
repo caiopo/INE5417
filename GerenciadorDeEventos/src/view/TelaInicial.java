@@ -16,16 +16,22 @@ public class TelaInicial extends JFrame {
 
 	public TelaInicial() {
 
-		JButton acompanharInscricao = new JButton("Acompanhe sua Inscrição");
+		JButton btnAcompanharInscricao = new JButton("Acompanhe sua Inscrição");
 		int sizeInscricaoX = 250;
 		int sizeInscricaoY = 20;
-		add(acompanharInscricao);
-		acompanharInscricao.setBounds((sizex - sizeInscricaoX) / 2, sizey - 60, sizeInscricaoX, sizeInscricaoY);
+		add(btnAcompanharInscricao);
+		btnAcompanharInscricao.setBounds((sizex - sizeInscricaoX) / 2, sizey - 60, sizeInscricaoX, sizeInscricaoY);
+		btnAcompanharInscricao.addActionListener((e) -> {
+			
+		});
 
 		JButton btnCadastroCurso = new JButton("Cadastro de Curso");
 		add(btnCadastroCurso);
 		btnCadastroCurso.setBounds((sizex - sizeInscricaoX) / 2, sizey - 140, sizeInscricaoX, sizeInscricaoY);
-
+		btnCadastroCurso.addActionListener((e) -> {
+			CadastroCurso.selecionar();
+		});
+		
 		JButton btnEditaCurso = new JButton("Edição de Curso");
 		add(btnEditaCurso);
 		btnEditaCurso.setBounds((sizex - sizeInscricaoX) / 2, sizey - 100, sizeInscricaoX, sizeInscricaoY);
@@ -33,21 +39,25 @@ public class TelaInicial extends JFrame {
 		JButton btnCadastroPessoa = new JButton("Cadastro de Pessoa");
 		add(btnCadastroPessoa);
 		btnCadastroPessoa.setBounds((sizex - sizeInscricaoX) / 2, sizey - 220, sizeInscricaoX, sizeInscricaoY);
-
-		JButton btnEditaPessoa = new JButton("Edição Pessoa");
-		add(btnEditaPessoa);
-		btnEditaPessoa.setBounds((sizex - sizeInscricaoX) / 2, sizey - 180, sizeInscricaoX, sizeInscricaoY);
 		btnCadastroPessoa.addActionListener((e) -> {
 			CadastroPessoa.selecionar();
 		});
 		
-		JButton btnCadastroLocal = new JButton("Cadastro Local");
+		JButton btnEditaPessoa = new JButton("Edição Pessoa");
+		add(btnEditaPessoa);
+		btnEditaPessoa.setBounds((sizex - sizeInscricaoX) / 2, sizey - 180, sizeInscricaoX, sizeInscricaoY);
+
+		
+		JButton btnCadastroLocal = new JButton("Cadastrar Local");
 		add(btnCadastroLocal);
-		btnCadastroLocal.setBounds((sizex - sizeInscricaoX) / 2, sizey - 260, sizeInscricaoX, sizeInscricaoY);
+		btnCadastroLocal.setBounds((sizex - sizeInscricaoX) / 2, sizey - 300, sizeInscricaoX, sizeInscricaoY);
+		btnCadastroLocal.addActionListener((e) -> {
+			CadastroLocal.selecionar();
+		});
 
 		JButton btnEdicaoLocal = new JButton("Editar Local");
 		add(btnEdicaoLocal);
-		btnEdicaoLocal.setBounds((sizex - sizeInscricaoX) / 2, sizey - 300, sizeInscricaoX, sizeInscricaoY);
+		btnEdicaoLocal.setBounds((sizex - sizeInscricaoX) / 2, sizey - 260, sizeInscricaoX, sizeInscricaoY);
 
 		setLayout(null);
 		setTitle("Gerenciador de Eventos");

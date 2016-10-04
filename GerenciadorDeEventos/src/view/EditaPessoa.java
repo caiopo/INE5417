@@ -15,9 +15,11 @@ import model.id.CPF;
 import model.id.Matricula;
 import model.pessoa.Palestrante;
 import model.pessoa.Participante;
+import model.pessoa.Pessoa;
 
 public class EditaPessoa {
-
+	
+	
 	public static void editarPalestrante(Palestrante palestrante) {
 		JTextField fieldNome = new JTextField(15);
 		JTextField fieldId = new JTextField(15);

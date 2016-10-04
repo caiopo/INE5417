@@ -15,10 +15,11 @@ import model.id.CPF;
 import model.id.Matricula;
 import model.pessoa.Palestrante;
 import model.pessoa.Participante;
+import model.pessoa.Pessoa;
 
 public class CadastroPessoa {
 	
-	public static void selecionar() {
+	public static Pessoa selecionar() {
 		JRadioButton btnParticipante = new JRadioButton("Participante", true);
 		JRadioButton btnPalestrante = new JRadioButton("Palestrante", false);
 		ButtonGroup grupoId = new ButtonGroup();
@@ -36,14 +37,14 @@ public class CadastroPessoa {
 		
 		if (botaoOk == JOptionPane.OK_OPTION) {
 			if (btnPalestrante.isSelected()) {
-				cadastroPalestrante();
+				return cadastroPalestrante();
 			} else {
-				cadastroParticipante();
+				return cadastroParticipante();
 			}
 		}
-
-		
+		return null;	
 	}
+	
 	public static Palestrante cadastroPalestrante() {
 		JTextField nome = new JTextField(15);
 		JTextField id = new JTextField(15);
