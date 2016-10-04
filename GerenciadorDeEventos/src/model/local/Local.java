@@ -2,8 +2,10 @@ package model.local;
 
 public abstract class Local {
 
+	private Integer oid = null;
+
 	private String nome;
-	private final int capacidade;
+	private int capacidade;
 
 	public Local(String nome, int capacidade) {
 		this.nome = nome;
@@ -28,4 +30,23 @@ public abstract class Local {
 		this.nome = nome;
 	}
 
+	public Integer getOID() {
+		return oid;
+	}
+
+	public void setOID(Integer oid) {
+		this.oid = oid;
+	}
+
+	public int getCapacidade() {
+		return capacidade;
+	}
+
+	public void setCapacidade(int capacidade) {
+		this.capacidade = capacidade;
+	}
+
+	public int getNumeroDeComputadores() {
+		return 0;
+	}
 }

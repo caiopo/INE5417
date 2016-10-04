@@ -3,6 +3,7 @@ package model.pessoa;
 import model.id.Identificador;
 
 public abstract class Pessoa {
+	private Integer oid = null;
 
 	private String nome;
 	private Identificador id;
@@ -36,5 +37,13 @@ public abstract class Pessoa {
 
 	public void setId(Identificador id) {
 		this.id = id;
+	}
+
+	public Integer getOID() {
+		return oid;
+	}
+
+	public void setOID(Integer oid) {
+		this.oid = oid;
 	}
 }

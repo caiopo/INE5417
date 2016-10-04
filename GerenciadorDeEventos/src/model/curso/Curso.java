@@ -10,6 +10,8 @@ import model.pessoa.Participante;
 
 public abstract class Curso {
 
+	private Integer oid = null;
+
 	private String nome;
 	private LocalDateTime horario;
 	private Local local;
@@ -85,4 +87,11 @@ public abstract class Curso {
 		this.participantes = participantes;
 	}
 
+	public Integer getOID() {
+		return oid;
+	}
+
+	public void setOID(Integer oid) {
+		this.oid = oid;
+	}
 }
