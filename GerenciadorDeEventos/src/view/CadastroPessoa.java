@@ -17,7 +17,33 @@ import model.pessoa.Palestrante;
 import model.pessoa.Participante;
 
 public class CadastroPessoa {
+	
+	public static void selecionar() {
+		JRadioButton btnParticipante = new JRadioButton("Participante", true);
+		JRadioButton btnPalestrante = new JRadioButton("Palestrante", false);
+		ButtonGroup grupoId = new ButtonGroup();
+		grupoId.add(btnPalestrante);
+		grupoId.add(btnParticipante);
+		JPanel janela = new JPanel();
+		janela.add(btnParticipante);
+		janela.add(btnPalestrante);
+		janela.setLayout(
+				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
+		
+		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
+				"Selecione a opção desejada",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+		
+		if (botaoOk == JOptionPane.OK_OPTION) {
+			if (btnPalestrante.isSelected()) {
+				cadastroPalestrante();
+			} else {
+				cadastroParticipante();
+			}
+		}
 
+		
+	}
 	public static Palestrante cadastroPalestrante() {
 		JTextField nome = new JTextField(15);
 		JTextField id = new JTextField(15);

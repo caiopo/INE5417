@@ -12,11 +12,12 @@ import view.CadastroEvento;
 import view.CadastroPessoa;
 import view.EditaCurso;
 import view.EditaPessoa;
+import view.TelaInicial;
 
 public class Main {
 
 	public static void main(String[] args) {
-
+		new TelaInicial();
 		Scanner entrada = new Scanner(System.in);
 		int opcao;
 		boolean on = true;
