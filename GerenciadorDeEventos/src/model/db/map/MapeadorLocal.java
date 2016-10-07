@@ -61,7 +61,7 @@ public class MapeadorLocal {
 
 	}
 
-	public void put(Local local) {
+	public static void put(Local local) {
 		Database db = Database.getInstance();
 
 		int tipo = local instanceof Auditorio ? AUDITORIO

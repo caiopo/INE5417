@@ -5,72 +5,86 @@ import javax.swing.JFrame;
 
 import model.curso.Curso;
 import model.db.map.MapeadorCurso;
+import model.db.map.MapeadorLocal;
+import model.db.map.MapeadorPessoa;
+import model.local.Local;
+import model.pessoa.Pessoa;
 
 public class TelaInicial extends JFrame {
-	public static int sizex = 300;
-	public static int sizey = 370;
+	private static final int SIZE_X = 400;
+	private static final int SIZE_Y = 370;
 
-	public TelaInicial() {
+	private static final int BUTTON_WIDTH = 330;
+	private static final int BUTTON_HEIGHT = 30;
+
+	public TelaInicial(String title) {
 
 		JButton btnAcompanharInscricao = new JButton("Acompanhe sua Inscrição");
-		int sizeInscricaoX = 250;
-		int sizeInscricaoY = 20;
-		add(btnAcompanharInscricao);
-		btnAcompanharInscricao.setBounds((sizex - sizeInscricaoX) / 2,
-				sizey - 60, sizeInscricaoX, sizeInscricaoY);
-		btnAcompanharInscricao.addActionListener((e) -> {
-			VerificaInscricao.pegaIdentificador();
 
+		add(btnAcompanharInscricao);
+		btnAcompanharInscricao.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
+				SIZE_Y - 60, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnAcompanharInscricao.addActionListener((e) -> {
+			String identificador = VerificaInscricao.pegaIdentificador();
+			System.out.println(identificador);
 		});
 
 		JButton btnCadastroCurso = new JButton("Cadastro de Curso");
 		add(btnCadastroCurso);
-		btnCadastroCurso.setBounds((sizex - sizeInscricaoX) / 2, sizey - 200,
-				sizeInscricaoX, sizeInscricaoY);
+		btnCadastroCurso.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 200,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnCadastroCurso.addActionListener((e) -> {
-			Curso c = CadastroCurso.selecionar();
-			MapeadorCurso.put(c);
+			Curso curso = CadastroCurso.selecionar();
+
+			if (curso != null)
+				MapeadorCurso.put(curso);
 		});
 
 		JButton btnEditaCurso = new JButton("Edição de Curso");
 		add(btnEditaCurso);
-		btnEditaCurso.setBounds((sizex - sizeInscricaoX) / 2, sizey - 160,
-				sizeInscricaoX, sizeInscricaoY);
+		btnEditaCurso.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 160,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		JButton btnCadastroPessoa = new JButton("Cadastro de Pessoa");
 		add(btnCadastroPessoa);
-		btnCadastroPessoa.setBounds((sizex - sizeInscricaoX) / 2, sizey - 280,
-				sizeInscricaoX, sizeInscricaoY);
+		btnCadastroPessoa.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 280,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnCadastroPessoa.addActionListener((e) -> {
-			CadastroPessoa.selecionar();
+			Pessoa pessoa = CadastroPessoa.selecionar();
+
+			if (pessoa != null)
+				MapeadorPessoa.put(pessoa);
 		});
 
 		JButton btnEditaPessoa = new JButton("Edição Pessoa");
 		add(btnEditaPessoa);
-		btnEditaPessoa.setBounds((sizex - sizeInscricaoX) / 2, sizey - 240,
-				sizeInscricaoX, sizeInscricaoY);
+		btnEditaPessoa.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 240,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 
 		JButton btnCadastroLocal = new JButton("Cadastrar Local");
 		add(btnCadastroLocal);
-		btnCadastroLocal.setBounds((sizex - sizeInscricaoX) / 2, sizey - 360,
-				sizeInscricaoX, sizeInscricaoY);
+		btnCadastroLocal.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 360,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnCadastroLocal.addActionListener((e) -> {
-			CadastroLocal.selecionar();
+			Local local = CadastroLocal.selecionar();
+
+			if (local != null)
+				MapeadorLocal.put(local);
 		});
 
 		JButton btnVisualizarLocal = new JButton("Visualizar Local");
 		add(btnVisualizarLocal);
-		btnVisualizarLocal.setBounds((sizex - sizeInscricaoX) / 2, sizey - 320,
-				sizeInscricaoX, sizeInscricaoY);
+		btnVisualizarLocal.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 320,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnVisualizarLocal.addActionListener((e) -> {
 			VisualizarLocal.visualizar();
 		});
 
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
-		setTitle("Gerenciador de Eventos");
-		setSize(sizex, sizey);
+		setTitle("Gerenciador de Eventos: " + title);
+		setSize(SIZE_X, SIZE_Y);
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 }

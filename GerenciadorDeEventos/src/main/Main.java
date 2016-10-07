@@ -9,10 +9,12 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Evento evento = CadastroEvento.cadastroEvento();
+		// Evento evento = CadastroEvento.cadastroEvento();
+		//
+		// Database.init(evento.getNome());
 
-		Database.init(evento.getNome());
+		Database.init("seccom");
 
-		new TelaInicial();
+		new TelaInicial("seccom");
 	}
 }
