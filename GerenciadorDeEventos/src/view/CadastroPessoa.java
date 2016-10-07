@@ -11,7 +11,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import exceptions.BadCPFException;
-import model.curso.Evento;
 import model.id.CPF;
 import model.id.Matricula;
 import model.pessoa.Palestrante;

@@ -2,7 +2,6 @@ package model.db.map;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class MapeadorCurso {
 		Curso c = null;
 		String nome = null;
 		Local local = null;
-		LocalDateTime horario = null;
+		String horario = null;
 		Palestrante palestrante = null;
 		int tipo = -1;
 		int duracao = 0;
@@ -43,6 +42,7 @@ public class MapeadorCurso {
 			tipo = rs.getInt("tipo");
 			local = MapeadorLocal.get(rs.getInt("local"));
 			duracao = rs.getInt("duracao");
+			horario = rs.getString("horario");
 			palestrante = (Palestrante) MapeadorPessoa
 					.get(rs.getInt("palestrante"));
 
@@ -86,7 +86,7 @@ public class MapeadorCurso {
 
 		if (curso.getOID() == null) {
 			String sql = String.format(SQLStrings.INSERT_CURSO, curso.getNome(),
-					"1999-01-08 04:05:06", curso.getDuracao(), tipo,
+					curso.getHorario(), curso.getDuracao(), tipo,
 					curso.getPalestrante().getOID());
 
 			ResultSet rs = db.execute(sql);

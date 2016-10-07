@@ -92,31 +92,4 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-
-	// public ResultSet executeSQL2(String sql) {
-	//
-	// try {
-	// PreparedStatement stmt = conn.prepareStatement(sql);
-	// return stmt.executeQuery();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return null;
-	// }
-	//
-	// public ResultSet executeSQL(String sql) {
-	//
-	// try {
-	// Statement stmt = conn.createStatement();
-	//
-	// return stmt.executeQuery(sql);
-	// stmt.upda
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return null;
-	// }
-
 }

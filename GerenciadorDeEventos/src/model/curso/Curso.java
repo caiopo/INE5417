@@ -1,6 +1,5 @@
 package model.curso;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +12,14 @@ public abstract class Curso {
 	private Integer oid = null;
 
 	private String nome;
-	private LocalDateTime horario;
+	private String horario;
 	private Local local;
 	private int duracao;
 	private Palestrante palestrante;
 
 	private List<Participante> participantes = new ArrayList<>();
 
-	public Curso(String nome, LocalDateTime horario, Local local,
+	public Curso(String nome, String horario, Local local,
 			Palestrante palestrante, int duracao) {
 		this.nome = nome;
 		this.horario = horario;
@@ -43,7 +42,7 @@ public abstract class Curso {
 		return nome;
 	}
 
-	public LocalDateTime getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
@@ -67,7 +66,7 @@ public abstract class Curso {
 		this.nome = nome;
 	}
 
-	public void setHorario(LocalDateTime horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 

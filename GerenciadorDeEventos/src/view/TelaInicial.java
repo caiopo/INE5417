@@ -72,7 +72,7 @@ public class TelaInicial extends JFrame {
 				MapeadorLocal.put(local);
 		});
 
-		JButton btnVisualizarLocal = new JButton("Visualizar Local");
+		JButton btnVisualizarLocal = new JButton("Editar/Visualizar Local");
 		add(btnVisualizarLocal);
 		btnVisualizarLocal.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 320,
 				BUTTON_WIDTH, BUTTON_HEIGHT);

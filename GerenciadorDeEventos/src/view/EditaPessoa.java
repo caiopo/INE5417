@@ -15,7 +15,6 @@ import model.id.CPF;
 import model.id.Matricula;
 import model.pessoa.Palestrante;
 import model.pessoa.Participante;
-import model.pessoa.Pessoa;
 
 public class EditaPessoa {
 	

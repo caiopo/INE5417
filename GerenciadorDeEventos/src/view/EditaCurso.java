@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.LayoutManager;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -14,9 +12,6 @@ import model.curso.Curso;
 
 public class EditaCurso {
 
-	private static DateTimeFormatter formatador = DateTimeFormatter
-			.ofPattern("yyyy-MM-dd HH:mm");
-
 	public static void edita(Curso curso) {
 		JTextField fieldNome = new JTextField(15);
 		JTextField fieldHorario = new JTextField(15);
@@ -25,7 +20,7 @@ public class EditaCurso {
 		JTextField fieldPalestrante = new JTextField(15);
 
 		fieldNome.setText(curso.getNome());
-		fieldHorario.setText(curso.getHorario().toString());
+		fieldHorario.setText(curso.getHorario());
 		fieldLocal.setText(curso.getLocal().getNome());
 		fieldDuracao.setText(Integer.toString(curso.getDuracao()));
 		fieldPalestrante.setText(curso.getPalestrante().getNome());
@@ -49,8 +44,7 @@ public class EditaCurso {
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
 			curso.setNome(fieldNome.getText());
-			curso.setHorario(
-					LocalDateTime.parse(fieldHorario.getText(), formatador));
+			curso.setHorario(fieldHorario.getText());
 			curso.getLocal().setNome(fieldLocal.getText());
 			curso.setDuracao(Integer.parseInt(fieldDuracao.getText()));
 			curso.getPalestrante().setNome(fieldPalestrante.getText());

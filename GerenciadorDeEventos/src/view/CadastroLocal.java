@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.LayoutManager;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -12,14 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import model.curso.Curso;
-import model.curso.Minicurso;
-import model.curso.Palestra;
 import model.local.Auditorio;
 import model.local.Laboratorio;
 import model.local.Local;
 import model.local.SalaDeAula;
-import model.pessoa.Palestrante;
 
 public class CadastroLocal {
 	

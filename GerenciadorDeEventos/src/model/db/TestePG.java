@@ -1,11 +1,15 @@
 package model.db;
 
+import java.util.List;
+
 import model.curso.Curso;
 import model.curso.Minicurso;
 import model.db.map.MapeadorCurso;
+import model.db.map.MapeadorPessoa;
 import model.id.Matricula;
 import model.pessoa.Palestrante;
 import model.pessoa.Participante;
+import model.pessoa.Pessoa;
 
 public class TestePG {
 
@@ -28,12 +32,16 @@ public class TestePG {
 
 		System.out.println(c.getOID());
 
-		// for ()
-
 		System.out.println("putting");
 		MapeadorCurso.put(c);
 
 		System.out.println(c.getOID());
+
+		List<Pessoa> lp = MapeadorPessoa.getAll();
+
+		lp.stream().forEach(pess -> {
+			System.out.println(pess.getOID());
+		});
 
 	}
 

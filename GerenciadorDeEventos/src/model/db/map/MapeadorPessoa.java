@@ -2,6 +2,10 @@ package model.db.map;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sun.accessibility.internal.resources.accessibility;
 
 import model.db.Database;
 import model.db.SQLStrings;
@@ -26,8 +30,6 @@ public class MapeadorPessoa {
 		int tipo = 0;
 
 		String sql = String.format(SQLStrings.SELECT_PESSOA, oid);
-
-		System.out.println(sql);
 
 		ResultSet rs = db.execute(sql);
 
@@ -87,6 +89,26 @@ public class MapeadorPessoa {
 
 			db.execute(sql);
 		}
+	}
+
+	public static List<Pessoa> getAll() {
+		Database db = Database.getInstance();
+
+		List<Pessoa> pessoas = new ArrayList<>();
+
+		ResultSet rs = db.execute(SQLStrings.SELECT_ALL_ID_PESSOA);
+
+		try {
+
+			while (rs.next()) {
+				pessoas.add(get(rs.getInt("id")));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return pessoas;
 	}
 
 }
