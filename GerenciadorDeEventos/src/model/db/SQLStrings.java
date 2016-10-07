@@ -2,11 +2,7 @@ package model.db;
 
 public class SQLStrings {
 
-	// public static final String DB_NAME = "gerenciadoreventos";
-
 	public static final String DB_CREATE = "CREATE DATABASE ";
-
-	// public static final String DB_DROP = "DROP DATABASE ";
 
 	public static final String[] TABLES_CREATE = {
 			"CREATE TABLE IF NOT EXISTS PESSOAS (ID SERIAL NOT NULL PRIMARY KEY, IDENTIFICADOR VARCHAR(11), "
@@ -16,7 +12,8 @@ public class SQLStrings {
 					+ "NOME VARCHAR(100), CAPACIDADE INTEGER, TIPO INTEGER, NUM_COMP INTEGER);",
 
 			"CREATE TABLE IF NOT EXISTS CURSOS (ID SERIAL NOT NULL PRIMARY KEY, "
-					+ "NOME VARCHAR(100), HORARIO VARCHAR(100), DURACAO INTEGER, TIPO INTEGER, PALESTRANTE INTEGER REFERENCES PESSOAS(ID));",
+					+ "NOME VARCHAR(100), HORARIO VARCHAR(100), DURACAO INTEGER, TIPO INTEGER, PALESTRANTE INTEGER REFERENCES PESSOAS(ID), "
+					+ "LOCAL INTEGER REFERENCES LOCAIS(ID));",
 
 			"CREATE TABLE IF NOT EXISTS PARTICIPANTES_CURSO (ID SERIAL NOT NULL, CURSO INTEGER NOT NULL REFERENCES CURSOS(ID), "
 					+ "PARTICIPANTE INTEGER NOT NULL REFERENCES PESSOAS(ID));"
@@ -29,8 +26,8 @@ public class SQLStrings {
 	public static final String INSERT_LOCAL = "INSERT INTO LOCAIS (NOME, CAPACIDADE, TIPO, NUM_COMP) "
 			+ "VALUES ('%s', %d, %d, %d) RETURNING ID;";
 
-	public static final String INSERT_CURSO = "INSERT INTO CURSOS (NOME, HORARIO, DURACAO, TIPO, PALESTRANTE) "
-			+ "VALUES ('%s', '%s', %d, %d, %d) RETURNING ID;";
+	public static final String INSERT_CURSO = "INSERT INTO CURSOS (NOME, HORARIO, DURACAO, TIPO, PALESTRANTE, LOCAL) "
+			+ "VALUES ('%s', '%s', %d, %d, %d, %d) RETURNING ID;";
 
 	public static final String INSERT_PART_CURSO = "INSERT INTO PARTICIPANTES_CURSO (CURSO, PARTICIPANTE) "
 			+ "VALUES (%d, %d) RETURNING ID;";
@@ -39,7 +36,7 @@ public class SQLStrings {
 
 	public static final String UPDATE_LOCAL = "UPDATE LOCAIS SET NOME = '%s', CAPACIDADE = %d, NUM_COMP = %d WHERE ID = %d";
 
-	public static final String UPDATE_CURSO = "UPDATE CURSOS SET NOME = '%s', HORARIO = '%s', DURACAO = %d, PALESTRANTE = %d WHERE ID = %d";
+	public static final String UPDATE_CURSO = "UPDATE CURSOS SET NOME = '%s', HORARIO = '%s', DURACAO = %d, TIPO = %d, PALESTRANTE = %d, LOCAL = %d WHERE ID = %d";
 
 	// public static final String UPDATE_PART_CURSO = "UPDATE
 	// PARTICIPANTES_CURSO SET %s WHERE ID=%d";
@@ -50,13 +47,15 @@ public class SQLStrings {
 
 	public static final String SELECT_CURSO = "SELECT * FROM CURSOS WHERE ID = %d";
 
-	public static final String SELECT_PART_CURSO = "SELECT * FROM PARTICIPANTES_CURSO WHERE CURSO = %d";
+	public static final String SELECT_PART_CURSO = "SELECT DISTINCT CURSO, PARTICIPANTE FROM PARTICIPANTES_CURSO WHERE CURSO = %d";
 
 	public static final String SELECT_ALL_LOCAL = "SELECT * FROM LOCAIS";
 
 	public static final String SELECT_ALL_ID_CURSO = "SELECT ID FROM CURSOS";
 
 	public static final String SELECT_ALL_ID_PESSOA = "SELECT ID FROM PESSOAS";
+
+	public static final String SELECT_CURSOS_FROM_PESSOA = "SELECT DISTINCT CURSO FROM PARTICIPANTES_CURSO WHERE PARTICIPANTE = %d";
 
 	// **Tabela Pessoa:**
 	// identificador: char(11), primary key

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import model.db.map.MapeadorLocal;
 import model.local.Local;
 
-public class VisualizarLocal {
+public class VisualizaLocal {
 
 	public static Local visualizar() {
 
@@ -20,7 +20,6 @@ public class VisualizarLocal {
 		JButton btnEditar = new JButton("Editar Local");
 
 		List<Local> listaLocais = MapeadorLocal.getAll();
-		System.out.println(listaLocais.size());
 
 		if (listaLocais.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Nenhum local foi cadastrado",
@@ -30,8 +29,7 @@ public class VisualizarLocal {
 		}
 
 		String[] opcaoLocais = listaLocais.stream()
-				.map(local -> local.getNome())
-				.toArray(size -> new String[size]);
+				.map(local -> local.getNome()).toArray(String[]::new);
 
 		JComboBox<String> comboBox = new JComboBox<String>(opcaoLocais);
 

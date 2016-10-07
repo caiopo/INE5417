@@ -4,9 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import com.sun.accessibility.internal.resources.accessibility;
-
+import model.curso.Curso;
 import model.db.Database;
 import model.db.SQLStrings;
 import model.id.CPF;
@@ -109,6 +109,44 @@ public class MapeadorPessoa {
 		}
 
 		return pessoas;
+	}
+
+	public static List<Palestrante> getPalestrantes() {
+		return getAll().stream().filter(p -> p instanceof Palestrante)
+				.map(p -> (Palestrante) p).collect(Collectors.toList());
+	}
+
+	public static List<Participante> getParticipantes() {
+		return getAll().stream().filter(p -> p instanceof Participante)
+				.map(p -> (Participante) p).collect(Collectors.toList());
+	}
+
+	public static List<Curso> getCursos(Participante p) {
+		Database db = Database.getInstance();
+
+		List<Curso> cursos = new ArrayList<>();
+
+		if (p.getOID() == null) {
+			return cursos;
+		}
+
+		String sql = String.format(SQLStrings.SELECT_CURSOS_FROM_PESSOA,
+				p.getOID());
+
+		ResultSet rs = db.execute(sql);
+
+		try {
+			while (rs.next()) {
+				int curso = rs.getInt("curso");
+
+				cursos.add(MapeadorCurso.get(curso));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return cursos;
+
 	}
 
 }

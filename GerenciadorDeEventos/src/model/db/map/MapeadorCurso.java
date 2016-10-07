@@ -29,9 +29,7 @@ public class MapeadorCurso {
 		int tipo = -1;
 		int duracao = 0;
 
-		String sql = String.format(SQLStrings.SELECT_PESSOA, oid);
-
-		System.out.println(sql);
+		String sql = String.format(SQLStrings.SELECT_CURSO, oid);
 
 		ResultSet rs = db.execute(sql);
 
@@ -84,10 +82,14 @@ public class MapeadorCurso {
 			MapeadorPessoa.put(curso.getPalestrante());
 		}
 
+		if (curso.getLocal().getOID() == null) {
+			MapeadorLocal.put(curso.getLocal());
+		}
+
 		if (curso.getOID() == null) {
 			String sql = String.format(SQLStrings.INSERT_CURSO, curso.getNome(),
 					curso.getHorario(), curso.getDuracao(), tipo,
-					curso.getPalestrante().getOID());
+					curso.getPalestrante().getOID(), curso.getLocal().getOID());
 
 			ResultSet rs = db.execute(sql);
 
@@ -103,10 +105,10 @@ public class MapeadorCurso {
 		} else {
 			String sql = String.format(SQLStrings.UPDATE_CURSO, curso.getNome(),
 					curso.getHorario(), curso.getDuracao(), tipo,
-					curso.getPalestrante().getOID());
+					curso.getPalestrante().getOID(), curso.getLocal().getOID(),
+					curso.getOID());
 
 			db.execute(sql);
-
 		}
 
 		for (Participante p : curso.getParticipantes()) {
@@ -132,7 +134,7 @@ public class MapeadorCurso {
 		try {
 
 			while (rs.next()) {
-				cursos.add(get(rs.getInt("curso")));
+				cursos.add(get(rs.getInt("id")));
 			}
 
 		} catch (SQLException e) {

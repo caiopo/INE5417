@@ -14,7 +14,10 @@ public abstract class Pessoa {
 	}
 
 	public boolean equals(Pessoa outra) {
-		return nome.equals(outra.nome) && id.get().equals(outra.id.get());
+		// return nome.equals(outra.nome) && id.get().equals(outra.id.get());
+
+		return getOID() != null && outra.getOID() != null
+				&& getOID().equals(outra.getOID());
 	}
 
 	@Override

@@ -20,13 +20,11 @@ public class TelaInicial extends JFrame {
 	public TelaInicial(String title) {
 
 		JButton btnAcompanharInscricao = new JButton("Acompanhe sua Inscrição");
-
 		add(btnAcompanharInscricao);
 		btnAcompanharInscricao.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
 				SIZE_Y - 80, BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnAcompanharInscricao.addActionListener((e) -> {
-			String identificador = VerificaInscricao.pegaIdentificador();
-			System.out.println(identificador);
+			Inscricao.inscricao();
 		});
 
 		JButton btnCadastroCurso = new JButton("Cadastro de Curso");
@@ -77,7 +75,7 @@ public class TelaInicial extends JFrame {
 		btnVisualizarLocal.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 320,
 				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnVisualizarLocal.addActionListener((e) -> {
-			VisualizarLocal.visualizar();
+			VisualizaLocal.visualizar();
 		});
 
 		JButton btnVisualizarCurso = new JButton("Visualizar Curso");
@@ -85,9 +83,9 @@ public class TelaInicial extends JFrame {
 		btnVisualizarCurso.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 120,
 				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnVisualizarCurso.addActionListener((e) -> {
-			VisualizarCurso.visualizar();
+			VisualizaCurso.visualizar();
 		});
-		
+
 		JButton btnVisualizarPessoa = new JButton("Visualizar Pessoa");
 		add(btnVisualizarPessoa);
 		btnVisualizarPessoa.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 400,
@@ -95,7 +93,7 @@ public class TelaInicial extends JFrame {
 		btnVisualizarPessoa.addActionListener((e) -> {
 			VisualizaPessoa.visualizar();
 		});
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 		setTitle("Gerenciador de Eventos: " + title);

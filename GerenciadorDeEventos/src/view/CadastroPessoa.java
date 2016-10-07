@@ -18,13 +18,8 @@ import model.pessoa.Participante;
 import model.pessoa.Pessoa;
 
 public class CadastroPessoa {
-	
+
 	public static Pessoa selecionar() {
-		// if(!Evento.getInstance().possuiCurso()) {
-		// JOptionPane.showMessageDialog(null, "Não existem cursos nesse
-		// evento");
-		// return null;
-		// }
 		JRadioButton btnParticipante = new JRadioButton("Participante", true);
 		JRadioButton btnPalestrante = new JRadioButton("Palestrante", false);
 		ButtonGroup grupoId = new ButtonGroup();
@@ -35,11 +30,11 @@ public class CadastroPessoa {
 		janela.add(btnPalestrante);
 		janela.setLayout(
 				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
-		
+
 		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
-				"Selecione a opção desejada",
-				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-		
+				"Selecione a opção desejada", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.PLAIN_MESSAGE);
+
 		if (botaoOk == JOptionPane.OK_OPTION) {
 			if (btnPalestrante.isSelected()) {
 				return cadastroPalestrante();
@@ -47,9 +42,9 @@ public class CadastroPessoa {
 				return cadastroParticipante();
 			}
 		}
-		return null;	
+		return null;
 	}
-	
+
 	public static Palestrante cadastroPalestrante() {
 		JTextField nome = new JTextField(15);
 		JTextField id = new JTextField(15);
@@ -136,4 +131,5 @@ public class CadastroPessoa {
 
 		return null;
 	}
+
 }

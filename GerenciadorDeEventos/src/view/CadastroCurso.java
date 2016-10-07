@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import model.curso.Curso;
 import model.curso.Minicurso;
 import model.curso.Palestra;
+import model.local.Local;
+import model.pessoa.Palestrante;
 
 public class CadastroCurso {
 
@@ -85,11 +87,25 @@ public class CadastroCurso {
 
 		int _duracao = Integer.parseInt(duracao.getText());
 
+		Palestrante palestrante = VisualizaPessoa.visualizarPalestrantes();
+
+		if (palestrante == null) {
+			return null;
+		}
+
+		Local local = VisualizaLocal.visualizar();
+
+		if (local == null) {
+			return null;
+		}
+
 		if (botaoOk == JOptionPane.OK_OPTION) {
 			if (classe == Palestra.class) {
-				return new Palestra(_nome, _horario, null, null, _duracao);
+				return new Palestra(_nome, _horario, local, palestrante,
+						_duracao);
 			} else {
-				return new Minicurso(_nome, _horario, null, null, _duracao);
+				return new Minicurso(_nome, _horario, local, palestrante,
+						_duracao);
 			}
 		} else {
 			return null;
