@@ -1,7 +1,6 @@
 package view;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
@@ -11,17 +10,6 @@ import model.db.map.MapeadorPessoa;
 import model.pessoa.Participante;
 
 public class Inscricao {
-
-	private static boolean isInCurso(Participante participante, Curso curso) {
-		return curso.getParticipantes().stream().anyMatch(p -> {
-
-			System.out.println(p.getId().get());
-			System.out.println(participante.getId().get());
-			System.out.println("");
-
-			return p.getId().get().equals(participante.getId().get());
-		});
-	}
 
 	public static void inscricao() {
 		String identificador = VerificaInscricao.pegaIdentificador();
