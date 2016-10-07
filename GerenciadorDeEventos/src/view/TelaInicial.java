@@ -11,8 +11,8 @@ import model.local.Local;
 import model.pessoa.Pessoa;
 
 public class TelaInicial extends JFrame {
-	private static final int SIZE_X = 400;
-	private static final int SIZE_Y = 370;
+	private static final int SIZE_X = 350;
+	private static final int SIZE_Y = 420;
 
 	private static final int BUTTON_WIDTH = 330;
 	private static final int BUTTON_HEIGHT = 30;
@@ -23,7 +23,7 @@ public class TelaInicial extends JFrame {
 
 		add(btnAcompanharInscricao);
 		btnAcompanharInscricao.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
-				SIZE_Y - 60, BUTTON_WIDTH, BUTTON_HEIGHT);
+				SIZE_Y - 80, BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnAcompanharInscricao.addActionListener((e) -> {
 			String identificador = VerificaInscricao.pegaIdentificador();
 			System.out.println(identificador);
@@ -80,6 +80,22 @@ public class TelaInicial extends JFrame {
 			VisualizarLocal.visualizar();
 		});
 
+		JButton btnVisualizarCurso = new JButton("Visualizar Curso");
+		add(btnVisualizarCurso);
+		btnVisualizarCurso.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 120,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnVisualizarCurso.addActionListener((e) -> {
+			VisualizarCurso.visualizar();
+		});
+		
+		JButton btnVisualizarPessoa = new JButton("Visualizar Pessoa");
+		add(btnVisualizarPessoa);
+		btnVisualizarPessoa.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 400,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnVisualizarPessoa.addActionListener((e) -> {
+			VisualizaPessoa.visualizar();
+		});
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 		setTitle("Gerenciador de Eventos: " + title);

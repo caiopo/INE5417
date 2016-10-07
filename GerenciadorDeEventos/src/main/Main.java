@@ -13,8 +13,9 @@ public class Main {
 		//
 		// Database.init(evento.getNome());
 
-		Database.init("seccom");
+		//Database.init("seccom");
 
+		
 		new TelaInicial("seccom");
 	}
 }
