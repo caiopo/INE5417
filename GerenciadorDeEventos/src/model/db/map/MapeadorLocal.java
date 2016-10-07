@@ -85,7 +85,7 @@ public class MapeadorLocal {
 
 	}
 
-	public List<Local> getAll() {
+	public static List<Local> getAll() {
 		Database db = Database.getInstance();
 
 		List<Local> locais = new ArrayList<>();
