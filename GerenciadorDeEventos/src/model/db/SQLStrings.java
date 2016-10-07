@@ -2,11 +2,11 @@ package model.db;
 
 public class SQLStrings {
 
-	public static final String DB_NAME = "gerenciadoreventos";
+	// public static final String DB_NAME = "gerenciadoreventos";
 
-	public static final String DB_CREATE = "CREATE DATABASE " + DB_NAME;
+	public static final String DB_CREATE = "CREATE DATABASE ";
 
-	public static final String DB_DROP = "DROP DATABASE " + DB_NAME;
+	// public static final String DB_DROP = "DROP DATABASE ";
 
 	public static final String[] TABLES_CREATE = {
 			"CREATE TABLE IF NOT EXISTS PESSOAS (ID SERIAL NOT NULL PRIMARY KEY, IDENTIFICADOR VARCHAR(11), "
@@ -16,7 +16,7 @@ public class SQLStrings {
 					+ "NOME VARCHAR(100), CAPACIDADE INTEGER, TIPO INTEGER, NUM_COMP INTEGER);",
 
 			"CREATE TABLE IF NOT EXISTS CURSOS (ID SERIAL NOT NULL PRIMARY KEY, "
-					+ "NOME VARCHAR(100), HORARIO DATE, DURACAO INTEGER, TIPO INTEGER, PALESTRANTE INTEGER REFERENCES PESSOAS(ID));",
+					+ "NOME VARCHAR(100), HORARIO TIMESTAMP, DURACAO INTEGER, TIPO INTEGER, PALESTRANTE INTEGER REFERENCES PESSOAS(ID));",
 
 			"CREATE TABLE IF NOT EXISTS PARTICIPANTES_CURSO (ID SERIAL NOT NULL, CURSO INTEGER NOT NULL REFERENCES CURSOS(ID), "
 					+ "PARTICIPANTE INTEGER NOT NULL REFERENCES PESSOAS(ID));"
@@ -50,9 +50,11 @@ public class SQLStrings {
 
 	public static final String SELECT_CURSO = "SELECT * FROM CURSOS WHERE ID = %d";
 
-	public static final String SELECT_PART_CURSO = "SELECT * FROM PARTICIPANTES_CURSO WHERE ID = %d";
+	public static final String SELECT_PART_CURSO = "SELECT * FROM PARTICIPANTES_CURSO WHERE CURSO = %d";
 
 	public static final String SELECT_ALL_LOCAL = "SELECT * FROM LOCAIS";
+
+	public static final String SELECT_ALL_ID_CURSO = "SELECT ID FROM CURSOS";
 
 	// **Tabela Pessoa:**
 	// identificador: char(11), primary key

@@ -17,7 +17,6 @@ public class MapeadorPessoa {
 	private static final int PALESTRANTE = 0, PARTICIPANTE = 1;
 
 	public static Pessoa get(Integer oid) {
-
 		Database db = Database.getInstance();
 
 		Pessoa p = null;
@@ -30,7 +29,7 @@ public class MapeadorPessoa {
 
 		System.out.println(sql);
 
-		ResultSet rs = db.executeSQL(sql);
+		ResultSet rs = db.execute(sql);
 
 		try {
 			rs.next();
@@ -41,7 +40,6 @@ public class MapeadorPessoa {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-
 		}
 
 		if (idstr.length() == 11) {
@@ -72,12 +70,12 @@ public class MapeadorPessoa {
 			String sql = String.format(SQLStrings.INSERT_PESSOA,
 					p.getId().get(), p.getNome(), tipo);
 
-			ResultSet rs = db.executeSQL(sql);
+			ResultSet rs = db.execute(sql);
 
 			try {
 				rs.next();
 
-				System.out.println(rs.getInt("id"));
+				p.setOID(rs.getInt("id"));
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -87,7 +85,7 @@ public class MapeadorPessoa {
 			String sql = String.format(SQLStrings.UPDATE_PESSOA,
 					p.getId().get(), p.getNome(), p.getOID());
 
-			db.executeSQL(sql);
+			db.execute(sql);
 		}
 	}
 

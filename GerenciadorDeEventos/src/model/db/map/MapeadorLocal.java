@@ -28,7 +28,7 @@ public class MapeadorLocal {
 
 		String sql = String.format(SQLStrings.SELECT_LOCAL, oid);
 
-		ResultSet rs = db.executeSQL(sql);
+		ResultSet rs = db.execute(sql);
 
 		try {
 			rs.next();
@@ -70,9 +70,19 @@ public class MapeadorLocal {
 		if (local.getOID() == null) {
 
 			String sql = String.format(SQLStrings.INSERT_LOCAL, local.getNome(),
-					local.getCapacidade(), local.getNumeroDeComputadores());
+					local.getCapacidade(), tipo,
+					local.getNumeroDeComputadores());
 
-			db.executeSQL(sql);
+			ResultSet rs = db.execute(sql);
+
+			try {
+				rs.next();
+
+				local.setOID(rs.getInt("id"));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
 		} else {
 
@@ -80,9 +90,8 @@ public class MapeadorLocal {
 					local.getCapacidade(), local.getNumeroDeComputadores(),
 					local.getOID());
 
-			db.executeSQL(sql);
+			db.execute(sql);
 		}
-
 	}
 
 	public List<Local> getAll() {
@@ -90,7 +99,7 @@ public class MapeadorLocal {
 
 		List<Local> locais = new ArrayList<>();
 
-		ResultSet rs = db.executeSQL(SQLStrings.SELECT_ALL_LOCAL);
+		ResultSet rs = db.execute(SQLStrings.SELECT_ALL_LOCAL);
 
 		try {
 			while (rs.next()) {

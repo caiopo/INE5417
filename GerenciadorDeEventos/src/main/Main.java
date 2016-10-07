@@ -1,6 +1,7 @@
 package main;
 
 import model.curso.Evento;
+import model.db.Database;
 import view.CadastroEvento;
 import view.TelaInicial;
 
@@ -10,7 +11,7 @@ public class Main {
 
 		Evento evento = CadastroEvento.cadastroEvento();
 
-		Evento.setInstance(evento);
+		Database.init(evento.getNome());
 
 		new TelaInicial();
 	}

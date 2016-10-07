@@ -12,22 +12,29 @@ public class Database {
 
 	static Database db = null;
 
+	public static void init(String dbName) {
+		db = new Database(URL);
+
+		try {
+
+			db.execute(SQLStrings.DB_CREATE + dbName);
+
+		} catch (DatabaseException e) {
+
+		}
+
+		System.out.println(URL + dbName);
+
+		db = new Database(URL + dbName);
+
+		for (String sql : SQLStrings.TABLES_CREATE) {
+			db.execute(sql);
+		}
+	}
+
 	public static Database getInstance() {
 		if (db == null) {
-
-			db = new Database(URL);
-
-			try {
-
-				db.executeSQL(SQLStrings.DB_CREATE);
-
-			} catch (DatabaseException e) {
-			}
-
-			
-			System.out.println(URL + SQLStrings.DB_NAME);
-			
-			db = new Database(URL + SQLStrings.DB_NAME);
+			throw new DatabaseException("Must call init() first");
 		}
 
 		return db;
@@ -39,7 +46,7 @@ public class Database {
 	static final String USER = "postgres";
 	static final String PASSWORD = "postgres";
 
-	private Connection conn;
+	private Connection conn = null;
 
 	private Database(String URL) {
 		try {
@@ -61,13 +68,14 @@ public class Database {
 		conn = DriverManager.getConnection(url, USER, PASSWORD);
 	}
 
-	public ResultSet executeSQL(String sql) {
+	public ResultSet execute(String sql) {
 		try {
 
 			Statement stmt = conn.createStatement();
 
 			stmt.execute(sql);
 			return stmt.getResultSet();
+
 		} catch (SQLException e) {
 			DatabaseException de = new DatabaseException(e.getMessage());
 
