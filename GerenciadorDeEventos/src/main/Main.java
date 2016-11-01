@@ -1,27 +1,57 @@
 package main;
 
+import javax.swing.JOptionPane;
+
+import exceptions.DatabaseException;
 import model.curso.Evento;
 import model.db.Database;
-import model.db.map.MapeadorLocal;
-import model.local.Auditorio;
-import model.local.Laboratorio;
-import model.local.SalaDeAula;
 import view.CadastroEvento;
+import view.EditaEvento;
 import view.TelaInicial;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		Evento evento = CadastroEvento.cadastroEvento();
+		Evento evento = null;
 
-		Database.init(evento.getNome());
+		switch (CadastroEvento.tipoLogin()) {
+		case EDITAR:
+			String[] dbs = EditaEvento.renomearEvento();
 
-		MapeadorLocal.put(new SalaDeAula("Sala1", 10));
-		MapeadorLocal.put(new Laboratorio("Sala2", 10, 5));
-		MapeadorLocal.put(new Auditorio("Sala3", 100));
-		MapeadorLocal.put(new SalaDeAula("Sala4", 150));
+			try {
+				Database.renameDB(dbs[0], dbs[1]);
+			} catch (DatabaseException e) {
+				JOptionPane.showMessageDialog(null, "Evento inexistente");
+				System.exit(1);
+			}
 
-		new TelaInicial(evento.getNome());
+			break;
+
+		case CADASTRAR:
+			evento = CadastroEvento.cadastroEvento();
+
+			Database.createDB(evento.getNome());
+			Database.connectTo(evento.getNome());
+
+			break;
+
+		case LOGAR:
+			evento = CadastroEvento.cadastroEvento();
+
+			try {
+				Database.connectTo(evento.getNome());
+			} catch (DatabaseException e) {
+				JOptionPane.showMessageDialog(null, "Evento inexistente");
+				System.exit(1);
+			}
+
+			break;
+
+		}
+
+		if (evento != null) {
+			new TelaInicial(evento.getNome());
+		}
 	}
 }

@@ -31,7 +31,7 @@ public class EditaLocal {
 		JTextField fieldCapacidade = new JTextField(15);
 
 		fieldNome.setText(auditorio.getNome());
-		fieldCapacidade.setText("" + auditorio.getCapacidade());
+		fieldCapacidade.setText(Integer.toString(auditorio.getCapacidade()));
 
 		JPanel janela = new JPanel();
 		janela.setLayout(
@@ -46,7 +46,10 @@ public class EditaLocal {
 				JOptionPane.PLAIN_MESSAGE);
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
-			// chama o update
+
+			auditorio.setNome(fieldNome.getText());
+			auditorio
+					.setCapacidade(Integer.parseInt(fieldCapacidade.getText()));
 		}
 
 	}
@@ -57,7 +60,7 @@ public class EditaLocal {
 		JTextField fieldCapacidade = new JTextField(15);
 
 		fieldNome.setText(salaDeAula.getNome());
-		fieldCapacidade.setText("" + salaDeAula.getCapacidade());
+		fieldCapacidade.setText(Integer.toString(salaDeAula.getCapacidade()));
 
 		JPanel janela = new JPanel();
 		janela.setLayout(
@@ -72,7 +75,10 @@ public class EditaLocal {
 				JOptionPane.PLAIN_MESSAGE);
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
-			// chama o update
+
+			salaDeAula.setNome(fieldNome.getText());
+			salaDeAula
+					.setCapacidade(Integer.parseInt(fieldCapacidade.getText()));
 		}
 
 	}
@@ -81,11 +87,12 @@ public class EditaLocal {
 
 		JTextField fieldNome = new JTextField(15);
 		JTextField fieldCapacidade = new JTextField(15);
-		JTextField fieldNcomp = new JTextField(15);
+		JTextField fieldNComp = new JTextField(15);
 
 		fieldNome.setText(laboratorio.getNome());
-		fieldCapacidade.setText("" + laboratorio.getCapacidade());
-		fieldNcomp.setText("" + laboratorio.getNumeroDeComputadores());
+		fieldCapacidade.setText(Integer.toString(laboratorio.getCapacidade()));
+		fieldNComp.setText(
+				Integer.toString(laboratorio.getNumeroDeComputadores()));
 
 		JPanel janela = new JPanel();
 		janela.setLayout(
@@ -95,14 +102,20 @@ public class EditaLocal {
 		janela.add(new JLabel("Capacidade:"));
 		janela.add(fieldCapacidade);
 		janela.add(new JLabel("Número de Computadores:"));
-		janela.add(fieldNcomp);
+		janela.add(fieldNComp);
 
 		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
 				"Editar Local", JOptionPane.OK_CANCEL_OPTION,
 				JOptionPane.PLAIN_MESSAGE);
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
-			// chama o update
+
+			laboratorio.setNome(fieldNome.getText());
+			laboratorio
+					.setCapacidade(Integer.parseInt(fieldCapacidade.getText()));
+
+			laboratorio.setNumeroDeComputadores(
+					Integer.parseInt(fieldNComp.getText()));
 		}
 
 	}

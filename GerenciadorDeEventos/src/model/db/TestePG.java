@@ -7,7 +7,7 @@ public class TestePG {
 	public static void main(String[] args) {
 		// System.out.println(SQLStrings.DB_DROP);
 
-		Database.init("seccom");
+		Database.createDB("seccom");
 
 		// Database db = Database.getInstance();
 		//

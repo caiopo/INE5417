@@ -10,14 +10,20 @@ import exceptions.DatabaseException;
 
 public class Database {
 
-	static Database db = null;
+	private static final String URL = "jdbc:postgresql://172.17.0.2:5432/";
+	private static final String DRIVER = "org.postgresql.Driver";
 
-	public static void init(String dbName) {
-		db = new Database(URL);
+	private static final String USER = "postgres";
+	private static final String PASSWORD = "postgres";
+
+	private static Database db = null;
+
+	public static void createDB(String dbName) {
+		Database database = new Database(URL);
 
 		try {
 
-			db.execute(SQLStrings.DB_CREATE + dbName);
+			database.execute(SQLStrings.DB_CREATE + dbName);
 
 		} catch (DatabaseException e) {
 
@@ -25,11 +31,22 @@ public class Database {
 
 		System.out.println(URL + dbName);
 
-		db = new Database(URL + dbName);
+		database = new Database(URL + dbName);
 
 		for (String sql : SQLStrings.TABLES_CREATE) {
-			db.execute(sql);
+			database.execute(sql);
 		}
+	}
+
+	public static void renameDB(String oldName, String newName) {
+		Database database = new Database(URL);
+
+		database.execute(String.format(SQLStrings.DB_RENAME, oldName, newName));
+
+	}
+
+	public static void connectTo(String dbName) {
+		db = new Database(URL + dbName);
 	}
 
 	public static Database getInstance() {
@@ -40,19 +57,14 @@ public class Database {
 		return db;
 	}
 
-	static final String URL = "jdbc:postgresql://172.17.0.2:5432/";
-	static final String DRIVER = "org.postgresql.Driver";
-
-	static final String USER = "postgres";
-	static final String PASSWORD = "postgres";
-
 	private Connection conn = null;
 
 	private Database(String URL) {
 		try {
 			connect(URL);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			throw new DatabaseException(e.getMessage());
 		}
 
 	}

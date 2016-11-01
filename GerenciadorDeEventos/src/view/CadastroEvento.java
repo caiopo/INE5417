@@ -22,7 +22,7 @@ public class CadastroEvento {
 		janela.add(nome);
 
 		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
-				"Cadastro de Evento", JOptionPane.OK_CANCEL_OPTION,
+				"Evento", JOptionPane.OK_CANCEL_OPTION,
 				JOptionPane.PLAIN_MESSAGE);
 
 		if (botaoOk == JOptionPane.OK_OPTION) {
@@ -32,4 +32,24 @@ public class CadastroEvento {
 		return null;
 	}
 
+	public static TipoLogin tipoLogin() {
+		String[] ops = { "Logar", "Cadastrar", "Editar" };
+
+		String resposta = (String) JOptionPane.showInputDialog(null,
+				"Logar em evento existente, cadastrar novo evento ou editar evento existente",
+				"Login", JOptionPane.PLAIN_MESSAGE, null, ops, ops[0]);
+
+		for (int i = 0; i < ops.length; i++) {
+			if (resposta.equals(ops[i])) {
+				return TipoLogin.values()[i];
+			}
+		}
+
+		return null;
+
+	}
+
+	public enum TipoLogin {
+		LOGAR, CADASTRAR, EDITAR;
+	}
 }

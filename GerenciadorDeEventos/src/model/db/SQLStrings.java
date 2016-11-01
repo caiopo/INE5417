@@ -4,6 +4,8 @@ public class SQLStrings {
 
 	public static final String DB_CREATE = "CREATE DATABASE ";
 
+	public static final String DB_RENAME = "ALTER DATABASE %s RENAME TO %s";
+
 	public static final String[] TABLES_CREATE = {
 			"CREATE TABLE IF NOT EXISTS PESSOAS (ID SERIAL NOT NULL PRIMARY KEY, IDENTIFICADOR VARCHAR(11), "
 					+ "NOME VARCHAR(100), TIPO INTEGER);",
