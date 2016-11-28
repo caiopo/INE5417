@@ -13,6 +13,7 @@ import model.db.SQLStrings;
 import model.local.Local;
 import model.pessoa.Palestrante;
 import model.pessoa.Participante;
+import model.pessoa.Pessoa;
 
 public class MapeadorCurso {
 
@@ -142,5 +143,45 @@ public class MapeadorCurso {
 		}
 
 		return cursos;
+	}
+	
+	public static void putPresenca(Curso curso, Pessoa pessoa) {
+
+		Database db = Database.getInstance();
+
+		
+		String sql = String.format(SQLStrings.INSERT_PRES_CURSO,
+				curso.getOID(), pessoa.getOID());
+
+		db.execute(sql);
+
+	}
+	
+	public static List<Participante> getPresenca(Curso c) {
+		Database db = Database.getInstance();
+
+		List<Participante> participantes = new ArrayList<>();
+
+		if (c == null) {
+			return participantes;
+		}
+
+		String sql = String.format(SQLStrings.SELECT_PRES_CURSO,
+				c.getOID());
+
+		ResultSet rs = db.execute(sql);
+
+		try {
+			while (rs.next()) {
+				int participante = rs.getInt("participante");
+
+				participantes.add((Participante) MapeadorPessoa.get(participante));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return participantes;
+
 	}
 }

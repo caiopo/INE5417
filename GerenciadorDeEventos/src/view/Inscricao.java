@@ -29,7 +29,7 @@ public class Inscricao {
 
 		List<Curso> cursos = MapeadorCurso.getAll();
 
-		cursos.forEach(c -> System.out.println(c.getNome()));
+//		cursos.forEach(c -> System.out.println(c.getNome()));
 
 		// List<Curso> inscritos = cursos.stream()
 		// .filter(c -> c.getParticipantes().contains(participante))
@@ -49,20 +49,20 @@ public class Inscricao {
 
 		JOptionPane.showMessageDialog(null, msgInscritos);
 
-		while (true) {
-			JOptionPane.showMessageDialog(null,
-					"Escolha um curso para de inscrever");
+		
+		JOptionPane.showMessageDialog(null,
+				"Escolha um curso para de inscrever");
 
-			Curso c = VisualizaCurso.visualizar();
+		Curso c = VisualizaCurso.visualizar();
 
-			if (c == null) {
-				break;
-			}
-
-			c.adicionaParticipante(participante);
-
-			MapeadorCurso.put(c);
+		if (c == null) {
+			return;
 		}
+
+		c.adicionaParticipante(participante);
+
+		MapeadorCurso.put(c);
+			
 
 		// cursos.stream().forEach(c -> MapeadorCurso.put(c));
 

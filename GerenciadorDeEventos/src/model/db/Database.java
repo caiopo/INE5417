@@ -10,7 +10,7 @@ import exceptions.DatabaseException;
 
 public class Database {
 
-	private static final String URL = "jdbc:postgresql://172.17.0.2:5432/";
+	private static final String URL = "jdbc:postgresql://localhost:5432/";
 	private static final String DRIVER = "org.postgresql.Driver";
 
 	private static final String USER = "postgres";
