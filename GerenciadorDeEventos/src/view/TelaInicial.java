@@ -9,6 +9,8 @@ import model.db.map.MapeadorLocal;
 import model.db.map.MapeadorPessoa;
 import model.local.Local;
 import model.pessoa.Pessoa;
+import model.utils.Inscricao;
+import model.utils.Presenca;
 
 public class TelaInicial extends JFrame {
 	private static final int SIZE_X = 350;
@@ -99,7 +101,7 @@ public class TelaInicial extends JFrame {
 		btnMarcarPresenca.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
 				SIZE_Y - 440, BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnMarcarPresenca.addActionListener((e) -> {
-			Presenca.presenca();
+			Presenca.registrar();
 		});
 		
 		JButton btnVerPresenca = new JButton("Ver presença");
@@ -117,4 +119,5 @@ public class TelaInicial extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+
 }
