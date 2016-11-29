@@ -25,8 +25,9 @@ public class VisualizaCurso {
 			return null;
 		}
 
-		String[] opcaoCursos = listaCursos.stream()
-				.map(local -> local.getNome()).toArray(String[]::new);
+		String[] opcaoCursos = listaCursos.stream().map(local -> local.getNome()
+				+ " | Local: " + local.getLocal().getNome())
+				.toArray(String[]::new);
 
 		JComboBox<String> comboBox = new JComboBox<String>(opcaoCursos);
 		comboBox.setSelectedIndex(0);
