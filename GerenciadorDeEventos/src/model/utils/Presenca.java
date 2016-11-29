@@ -1,6 +1,7 @@
 package model.utils;
 
 import javax.swing.JOptionPane;
+
 import model.curso.Curso;
 import model.db.map.MapeadorCurso;
 import model.db.map.MapeadorPessoa;

@@ -5,12 +5,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import exceptions.DatabaseException;
 
 public class Database {
 
-	private static final String URL = "jdbc:postgresql://localhost:5432/";
+	private static final String URL = "jdbc:postgresql://172.17.0.2:5432/";
 	private static final String DRIVER = "org.postgresql.Driver";
 
 	private static final String USER = "postgres";
@@ -29,8 +32,6 @@ public class Database {
 
 		}
 
-		System.out.println(URL + dbName);
-
 		database = new Database(URL + dbName);
 
 		for (String sql : SQLStrings.TABLES_CREATE) {
@@ -43,6 +44,24 @@ public class Database {
 
 		database.execute(String.format(SQLStrings.DB_RENAME, oldName, newName));
 
+	}
+
+	public static List<String> listDBs() {
+		ResultSet rs = new Database(URL).execute(SQLStrings.DB_LIST);
+
+		ArrayList<String> dbNames = new ArrayList<>();
+
+		try {
+			while (rs.next()) {
+				dbNames.add(rs.getString("datname"));
+			}
+		} catch (SQLException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+
+		dbNames.sort(Comparator.naturalOrder());
+
+		return dbNames;
 	}
 
 	public static void connectTo(String dbName) {
@@ -59,11 +78,11 @@ public class Database {
 
 	private Connection conn = null;
 
-	private Database(String URL) {
+	private Database(String url) {
+		System.out.println(url);
 		try {
-			connect(URL);
+			connect(url);
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			throw new DatabaseException(e.getMessage());
 		}
 

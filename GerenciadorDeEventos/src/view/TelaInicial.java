@@ -95,24 +95,24 @@ public class TelaInicial extends JFrame {
 		btnVisualizarPessoa.addActionListener((e) -> {
 			VisualizaPessoa.visualizar();
 		});
-		
+
 		JButton btnMarcarPresenca = new JButton("Registrar presença");
 		add(btnMarcarPresenca);
-		btnMarcarPresenca.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
-				SIZE_Y - 440, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnMarcarPresenca.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 440,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnMarcarPresenca.addActionListener((e) -> {
 			Presenca.registrar();
 		});
-		
+
 		JButton btnVerPresenca = new JButton("Ver presença");
 		add(btnVerPresenca);
-		btnVerPresenca.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
-				SIZE_Y - 480, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnVerPresenca.setBounds((SIZE_X - BUTTON_WIDTH) / 2, SIZE_Y - 480,
+				BUTTON_WIDTH, BUTTON_HEIGHT);
 		btnVerPresenca.addActionListener((e) -> {
 			Presenca.visualizar();
 		});
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(null);
 		setTitle("Gerenciador de Eventos: " + title);
 		setSize(SIZE_X, SIZE_Y);

@@ -13,45 +13,54 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Evento evento = null;
+		while (true) {
+			switch (CadastroEvento.tipoLogin()) {
+			case EDITAR:
 
-		switch (CadastroEvento.tipoLogin()) {
-		case EDITAR:
-			String[] dbs = EditaEvento.renomearEvento();
+				try {
+					EditaEvento.renomearEvento();
+				} catch (DatabaseException e) {
+					JOptionPane.showMessageDialog(null, "Erro");
+				}
 
-			try {
-				Database.renameDB(dbs[0], dbs[1]);
-			} catch (DatabaseException e) {
-				JOptionPane.showMessageDialog(null, "Evento inexistente");
-				System.exit(1);
+				break;
+
+			case CADASTRAR:
+				String nome = CadastroEvento.cadastroEvento().getNome();
+
+				Database.createDB(nome);
+
+				JOptionPane.showMessageDialog(null,
+						"Evento \"" + nome + "\" criado");
+
+				break;
+
+			case LOGAR:
+				Evento evento = CadastroEvento.cadastroEvento();
+
+				try {
+					Database.connectTo(evento.getNome());
+				} catch (DatabaseException e) {
+					JOptionPane.showMessageDialog(null, "Evento inexistente");
+					evento = null;
+				}
+
+				if (evento != null) {
+					TelaInicial ti = new TelaInicial(evento.getNome());
+
+					while (ti.isVisible()) {
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+
+						}
+					}
+				}
+
+				break;
 			}
-
-			break;
-
-		case CADASTRAR:
-			evento = CadastroEvento.cadastroEvento();
-
-			Database.createDB(evento.getNome());
-			Database.connectTo(evento.getNome());
-
-			break;
-
-		case LOGAR:
-			evento = CadastroEvento.cadastroEvento();
-
-			try {
-				Database.connectTo(evento.getNome());
-			} catch (DatabaseException e) {
-				JOptionPane.showMessageDialog(null, "Evento inexistente");
-				System.exit(1);
-			}
-
-			break;
 
 		}
 
-		if (evento != null) {
-			new TelaInicial(evento.getNome());
-		}
 	}
 }

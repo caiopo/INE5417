@@ -6,6 +6,8 @@ public class SQLStrings {
 
 	public static final String DB_RENAME = "ALTER DATABASE %s RENAME TO %s";
 
+	public static final String DB_LIST = "SELECT datname FROM pg_database WHERE datistemplate = false";
+
 	public static final String[] TABLES_CREATE = {
 			"CREATE TABLE IF NOT EXISTS PESSOAS (ID SERIAL NOT NULL PRIMARY KEY, IDENTIFICADOR VARCHAR(11), "
 					+ "NOME VARCHAR(100), TIPO INTEGER);",
@@ -19,10 +21,9 @@ public class SQLStrings {
 
 			"CREATE TABLE IF NOT EXISTS PARTICIPANTES_CURSO (ID SERIAL NOT NULL, CURSO INTEGER NOT NULL REFERENCES CURSOS(ID), "
 					+ "PARTICIPANTE INTEGER NOT NULL REFERENCES PESSOAS(ID));",
-					
+
 			"CREATE TABLE IF NOT EXISTS PARTICIPANTES_PRESENCA (ID SERIAL NOT NULL, CURSO INTEGER NOT NULL REFERENCES CURSOS(ID), "
-					+ "PARTICIPANTE INTEGER NOT NULL REFERENCES PESSOAS(ID));"
-	};
+					+ "PARTICIPANTE INTEGER NOT NULL REFERENCES PESSOAS(ID));" };
 
 	public static final String INSERT_PESSOA = "INSERT INTO PESSOAS (IDENTIFICADOR, NOME, TIPO) "
 			+ "VALUES ('%s', '%s', %d) RETURNING ID;";
@@ -35,7 +36,7 @@ public class SQLStrings {
 
 	public static final String INSERT_PART_CURSO = "INSERT INTO PARTICIPANTES_CURSO (CURSO, PARTICIPANTE) "
 			+ "VALUES (%d, %d) RETURNING ID;";
-	
+
 	public static final String INSERT_PRES_CURSO = "INSERT INTO PARTICIPANTES_PRESENCA (CURSO, PARTICIPANTE) "
 			+ "VALUES (%d, %d) RETURNING ID;";
 
@@ -44,9 +45,6 @@ public class SQLStrings {
 	public static final String UPDATE_LOCAL = "UPDATE LOCAIS SET NOME = '%s', CAPACIDADE = %d, NUM_COMP = %d WHERE ID = %d";
 
 	public static final String UPDATE_CURSO = "UPDATE CURSOS SET NOME = '%s', HORARIO = '%s', DURACAO = %d, TIPO = %d, PALESTRANTE = %d, LOCAL = %d WHERE ID = %d";
-
-	// public static final String UPDATE_PART_CURSO = "UPDATE
-	// PARTICIPANTES_CURSO SET %s WHERE ID=%d";
 
 	public static final String SELECT_PESSOA = "SELECT * FROM PESSOAS WHERE ID = %d";
 
@@ -57,7 +55,7 @@ public class SQLStrings {
 	public static final String SELECT_PART_CURSO = "SELECT DISTINCT CURSO, PARTICIPANTE FROM PARTICIPANTES_CURSO WHERE CURSO = %d";
 
 	public static final String SELECT_PRES_CURSO = "SELECT PARTICIPANTE FROM PARTICIPANTES_PRESENCA WHERE CURSO = %d";
-	
+
 	public static final String SELECT_ALL_LOCAL = "SELECT * FROM LOCAIS";
 
 	public static final String SELECT_ALL_ID_CURSO = "SELECT ID FROM CURSOS";
@@ -65,31 +63,5 @@ public class SQLStrings {
 	public static final String SELECT_ALL_ID_PESSOA = "SELECT ID FROM PESSOAS";
 
 	public static final String SELECT_CURSOS_FROM_PESSOA = "SELECT DISTINCT CURSO FROM PARTICIPANTES_CURSO WHERE PARTICIPANTE = %d";
-	
-	// **Tabela Pessoa:**
-	// identificador: char(11), primary key
-	// nome: char(100)
-	// tipo: int
-
-	// **Tabela Local:**
-	// id: int, primary key
-	// nome: char(50)
-	// capacidade: int
-	// tipo: int
-	// numeroDeComputadores: int
-
-	// **Tabela Curso:**
-	// id: int, primary key
-	// nome: char(100)
-	// horario: date
-	// duracao: int
-	// tipo: int
-	// palestrante: foreign key Pessoa.indentificador
-	// local: foreign key Local.id
-
-	// **Tabela CursoParticipantes:**
-	// id: int, primary key
-	// curso: foreign key Curso.id
-	// participante: foreign key Pessoa.identificador
 
 }

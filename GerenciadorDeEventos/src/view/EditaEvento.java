@@ -1,39 +1,46 @@
 package view;
 
 import java.awt.LayoutManager;
+import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
+import model.curso.Evento;
+import model.db.Database;
+import model.db.map.MapeadorEvento;
 
 public class EditaEvento {
-	public static String[] renomearEvento() {
-		JTextField fieldOldName = new JTextField(15);
-		JTextField fieldNewName = new JTextField(15);
-
+	private static String[] janelaRenomear(List<Evento> eventos) {
 		JPanel janela = new JPanel();
 		janela.setLayout(
 				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
 
-		janela.add(new JLabel("Antigo nome do evento:"));
-		janela.add(fieldOldName);
+		JComboBox<String> comboBox = new JComboBox<>(
+				eventos.stream().map(e -> e.getNome()).toArray(String[]::new));
 
-		janela.add(new JLabel("Novo nome do evento:"));
-		janela.add(fieldNewName);
+		janela.add(comboBox);
 
-		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
-				"Cadastro de Evento", JOptionPane.OK_CANCEL_OPTION,
+		JOptionPane.showMessageDialog(null, janela, "Editar evento",
 				JOptionPane.PLAIN_MESSAGE);
 
-		if (botaoOk == JOptionPane.OK_OPTION) {
-			return new String[] { fieldOldName.getText(),
-					fieldNewName.getText() };
+		String oldName = (String) comboBox.getSelectedItem();
 
-		}
+		String newName = JOptionPane
+				.showInputDialog("Digite o novo nome do evento");
 
-		return null;
+		return new String[] { oldName, newName };
+
+	}
+
+	public static void renomearEvento() {
+		List<Evento> eventos = MapeadorEvento.getAll();
+
+		String[] nomes = janelaRenomear(eventos);
+
+		Database.renameDB(nomes[0], nomes[1]);
 	}
 
 }
