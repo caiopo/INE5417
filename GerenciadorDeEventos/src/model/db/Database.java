@@ -83,7 +83,7 @@ public class Database {
 
 	public static Database getInstance() {
 		if (db == null) {
-			throw new DatabaseException("Must call init() first");
+			throw new DatabaseException("Must call connectTo() first");
 		}
 
 		return db;
@@ -96,7 +96,6 @@ public class Database {
 	private Connection conn = null;
 
 	private Database(String url) {
-		System.out.println(url);
 		try {
 			connect(url);
 		} catch (SQLException e) {
