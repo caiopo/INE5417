@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import exceptions.DatabaseException;
+import model.curso.Evento;
 
 public class Database {
 
@@ -20,6 +21,10 @@ public class Database {
 	private static final String PASSWORD = "postgres";
 
 	private static Database db = null;
+
+	public static void createDB(Evento evento) {
+		createDB(formatDBName(evento));
+	}
 
 	public static void createDB(String dbName) {
 		Database database = new Database(URL);
@@ -39,7 +44,11 @@ public class Database {
 		}
 	}
 
-	public static void renameDB(String oldName, String newName) {
+	public static void renameDB(Evento oldEvent, Evento newEvent) {
+		renameDB(formatDBName(oldEvent), formatDBName(newEvent));
+	}
+
+	private static void renameDB(String oldName, String newName) {
 		Database database = new Database(URL);
 
 		database.execute(String.format(SQLStrings.DB_RENAME, oldName, newName));
@@ -64,7 +73,11 @@ public class Database {
 		return dbNames;
 	}
 
-	public static void connectTo(String dbName) {
+	public static void connectTo(Evento evento) {
+		connectTo(formatDBName(evento));
+	}
+
+	private static void connectTo(String dbName) {
 		db = new Database(URL + dbName);
 	}
 
@@ -74,6 +87,10 @@ public class Database {
 		}
 
 		return db;
+	}
+
+	private static String formatDBName(Evento evento) {
+		return evento.getNome() + "__" + evento.getSenha();
 	}
 
 	private Connection conn = null;

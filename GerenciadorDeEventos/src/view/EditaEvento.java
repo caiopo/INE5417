@@ -13,7 +13,7 @@ import model.db.Database;
 import model.db.map.MapeadorEvento;
 
 public class EditaEvento {
-	private static String[] janelaRenomear(List<Evento> eventos) {
+	private static Evento escolheEvento(List<Evento> eventos) {
 		JPanel janela = new JPanel();
 		janela.setLayout(
 				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
@@ -26,21 +26,25 @@ public class EditaEvento {
 		JOptionPane.showMessageDialog(null, janela, "Editar evento",
 				JOptionPane.PLAIN_MESSAGE);
 
-		String oldName = (String) comboBox.getSelectedItem();
+		String nome = (String) comboBox.getSelectedItem();
 
-		String newName = JOptionPane
-				.showInputDialog("Digite o novo nome do evento");
+		for (Evento e : eventos) {
+			if (e.getNome().equals(nome)) {
+				return e;
+			}
+		}
 
-		return new String[] { oldName, newName };
-
+		return null;
 	}
 
 	public static void renomearEvento() {
 		List<Evento> eventos = MapeadorEvento.getAll();
 
-		String[] nomes = janelaRenomear(eventos);
+		Evento oldEvent = escolheEvento(eventos);
 
-		Database.renameDB(nomes[0], nomes[1]);
+		Evento newEvent = CadastroEvento.inputEvento();
+
+		Database.renameDB(oldEvent, newEvent);
 	}
 
 }

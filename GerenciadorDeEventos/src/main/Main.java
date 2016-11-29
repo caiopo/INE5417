@@ -12,54 +12,75 @@ import view.TelaInicial;
 public class Main {
 
 	public static void main(String[] args) {
+		try {
 
-		while (true) {
-			switch (CadastroEvento.tipoLogin()) {
-			case EDITAR:
+			Evento evento = null;
 
-				try {
-					EditaEvento.renomearEvento();
-				} catch (DatabaseException e) {
-					JOptionPane.showMessageDialog(null, "Erro");
-				}
+			while (true) {
+				switch (CadastroEvento.tipoLogin()) {
+				case EDITAR:
 
-				break;
+					try {
+						EditaEvento.renomearEvento();
+					} catch (DatabaseException e) {
+						JOptionPane.showMessageDialog(null, "Erro");
+					} catch (RuntimeException e) {
 
-			case CADASTRAR:
-				String nome = CadastroEvento.cadastroEvento().getNome();
+					}
 
-				Database.createDB(nome);
+					break;
 
-				JOptionPane.showMessageDialog(null,
-						"Evento \"" + nome + "\" criado");
+				case CADASTRAR:
+					try {
+						evento = CadastroEvento.inputEvento();
+					} catch (Exception e) {
+						break;
+					}
 
-				break;
+					Database.createDB(evento);
 
-			case LOGAR:
-				Evento evento = CadastroEvento.cadastroEvento();
+					JOptionPane.showMessageDialog(null,
+							"Evento \"" + evento.getNome() + "\" criado");
 
-				try {
-					Database.connectTo(evento.getNome());
-				} catch (DatabaseException e) {
-					JOptionPane.showMessageDialog(null, "Evento inexistente");
-					evento = null;
-				}
+					break;
 
-				if (evento != null) {
-					TelaInicial ti = new TelaInicial(evento.getNome());
+				case LOGAR:
+					try {
+						evento = CadastroEvento.inputEvento();
+					} catch (RuntimeException e) {
 
-					while (ti.isVisible()) {
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
+					}
 
+					try {
+						Database.connectTo(evento);
+					} catch (DatabaseException e) {
+						JOptionPane.showMessageDialog(null,
+								"Não foi possível logar.");
+						evento = null;
+					}
+
+					if (evento != null) {
+						TelaInicial ti = new TelaInicial(evento.getNome());
+
+						while (ti.isVisible()) {
+							try {
+								Thread.sleep(100);
+							} catch (InterruptedException e) {
+
+							}
 						}
 					}
+
+					break;
+
+				case CANCELAR:
+					System.exit(0);
 				}
 
-				break;
 			}
 
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
 
 	}

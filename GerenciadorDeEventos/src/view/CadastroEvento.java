@@ -12,24 +12,27 @@ import model.curso.Evento;
 
 public class CadastroEvento {
 
-	public static Evento cadastroEvento() {
+	public static Evento inputEvento() {
 		JTextField nome = new JTextField(15);
+		JTextField senha = new JTextField(15);
 
 		JPanel janela = new JPanel();
 		janela.setLayout(
 				(LayoutManager) new BoxLayout(janela, BoxLayout.Y_AXIS));
 		janela.add(new JLabel("Nome do evento:"));
 		janela.add(nome);
+		janela.add(new JLabel("Senha do evento:"));
+		janela.add(senha);
 
-		int botaoOk = JOptionPane.showConfirmDialog(null, janela,
-				"Evento", JOptionPane.OK_CANCEL_OPTION,
-				JOptionPane.PLAIN_MESSAGE);
+		int botaoOk = JOptionPane.showConfirmDialog(null, janela, "Evento",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-		if (botaoOk == JOptionPane.OK_OPTION) {
-			return new Evento(nome.getText());
+		if (botaoOk != JOptionPane.OK_OPTION || nome.getText().isEmpty()
+				|| senha.getText().isEmpty()) {
+			throw new RuntimeException();
 		}
 
-		return null;
+		return new Evento(nome.getText(), senha.getText());
 	}
 
 	public static TipoLogin tipoLogin() {
@@ -38,6 +41,10 @@ public class CadastroEvento {
 		String resposta = (String) JOptionPane.showInputDialog(null,
 				"Logar em evento existente, cadastrar novo evento ou editar evento existente",
 				"Login", JOptionPane.PLAIN_MESSAGE, null, ops, ops[0]);
+
+		if (resposta == null) {
+			return TipoLogin.CANCELAR;
+		}
 
 		for (int i = 0; i < ops.length; i++) {
 			if (resposta.equals(ops[i])) {
@@ -50,6 +57,6 @@ public class CadastroEvento {
 	}
 
 	public enum TipoLogin {
-		LOGAR, CADASTRAR, EDITAR;
+		LOGAR, CADASTRAR, EDITAR, CANCELAR;
 	}
 }

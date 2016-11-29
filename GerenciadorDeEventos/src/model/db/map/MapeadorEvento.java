@@ -13,7 +13,10 @@ public class MapeadorEvento {
 
 		nomes.remove("postgres");
 
-		return nomes.stream().map(Evento::new).collect(Collectors.toList());
-	}
+		return nomes.stream().map(s -> {
+			String[] namePasswd = s.split("__", 2);
 
+			return new Evento(namePasswd[0], namePasswd[1]);
+		}).collect(Collectors.toList());
+	}
 }
