@@ -15,8 +15,12 @@ public class VisualizaCurso {
 
 	public static Curso visualizar() {
 
+		return visualizar(MapeadorCurso.getAll());
+	}
+	
+	public static Curso visualizar(List<? extends Curso> listaCursos) {
+
 		JPanel janela = new JPanel();
-		List<Curso> listaCursos = MapeadorCurso.getAll();
 
 		if (listaCursos.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Nenhum curso foi cadastrado",
@@ -30,6 +34,7 @@ public class VisualizaCurso {
 				.toArray(String[]::new);
 
 		JComboBox<String> comboBox = new JComboBox<String>(opcaoCursos);
+
 		comboBox.setSelectedIndex(0);
 		janela.add(comboBox);
 

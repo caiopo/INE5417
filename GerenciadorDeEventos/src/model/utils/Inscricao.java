@@ -1,4 +1,4 @@
-package view;
+package model.utils;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import model.curso.Curso;
 import model.db.map.MapeadorCurso;
 import model.db.map.MapeadorPessoa;
 import model.pessoa.Participante;
+import view.VerificaInscricao;
+import view.VisualizaCurso;
 
 public class Inscricao {
 
@@ -27,9 +29,9 @@ public class Inscricao {
 
 		Participante participante = pessoas[0];
 
-		List<Curso> cursos = MapeadorCurso.getAll();
+//		List<Curso> cursos = MapeadorCurso.getAll();
 
-		cursos.forEach(c -> System.out.println(c.getNome()));
+//		cursos.forEach(c -> System.out.println(c.getNome()));
 
 		// List<Curso> inscritos = cursos.stream()
 		// .filter(c -> c.getParticipantes().contains(participante))
@@ -49,20 +51,20 @@ public class Inscricao {
 
 		JOptionPane.showMessageDialog(null, msgInscritos);
 
-		while (true) {
-			JOptionPane.showMessageDialog(null,
-					"Escolha um curso para de inscrever");
+		
+		JOptionPane.showMessageDialog(null,
+				"Escolha um curso para de inscrever");
 
-			Curso c = VisualizaCurso.visualizar();
+		Curso c = VisualizaCurso.visualizar();
 
-			if (c == null) {
-				break;
-			}
-
-			c.adicionaParticipante(participante);
-
-			MapeadorCurso.put(c);
+		if (c == null) {
+			return;
 		}
+
+		c.adicionaParticipante(participante);
+
+		MapeadorCurso.put(c);
+			
 
 		// cursos.stream().forEach(c -> MapeadorCurso.put(c));
 

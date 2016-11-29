@@ -9,10 +9,12 @@ import model.db.map.MapeadorLocal;
 import model.db.map.MapeadorPessoa;
 import model.local.Local;
 import model.pessoa.Pessoa;
+import model.utils.Inscricao;
+import model.utils.Presenca;
 
 public class TelaInicial extends JFrame {
 	private static final int SIZE_X = 350;
-	private static final int SIZE_Y = 420;
+	private static final int SIZE_Y = 500;
 
 	private static final int BUTTON_WIDTH = 330;
 	private static final int BUTTON_HEIGHT = 30;
@@ -93,6 +95,22 @@ public class TelaInicial extends JFrame {
 		btnVisualizarPessoa.addActionListener((e) -> {
 			VisualizaPessoa.visualizar();
 		});
+		
+		JButton btnMarcarPresenca = new JButton("Registrar presença");
+		add(btnMarcarPresenca);
+		btnMarcarPresenca.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
+				SIZE_Y - 440, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnMarcarPresenca.addActionListener((e) -> {
+			Presenca.registrar();
+		});
+		
+		JButton btnVerPresenca = new JButton("Ver presença");
+		add(btnVerPresenca);
+		btnVerPresenca.setBounds((SIZE_X - BUTTON_WIDTH) / 2,
+				SIZE_Y - 480, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnVerPresenca.addActionListener((e) -> {
+			Presenca.visualizar();
+		});
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
@@ -101,4 +119,5 @@ public class TelaInicial extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+
 }
